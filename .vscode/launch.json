@@ -1,0 +1,60 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run without Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "build C file",
+            "cwd": "${fileDirname}",
+            "program": "C:\\Windows\\System32\\cmd.exe",
+            "args": [
+                "/k",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "&",
+                "pause",
+                "&",
+                "exit"
+            ],
+            "environment": [],
+            "stopAtEntry": false,
+            "externalConsole": true,
+        },
+        {
+            "name": "Run with Debugging",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "build C file",
+            "cwd": "${fileDirname}",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "environment": [],
+            "stopAtEntry": false,
+            "externalConsole": true,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
+            "osx": {
+                "MIMode": "lldb"
+            },
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "C:\\MinGW\\bin\\gdb.exe"
+            },
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            
+        },
+    ]
+}
