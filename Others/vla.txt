@@ -1,0 +1,53 @@
+C99 표준
+ lifetime of a VLA ends when the declaration 
+ goes out of scope
+.
+
+The size of each VLA instance does not change
+ during its lifetime, but on another pass over
+ the same code, it may be allocated with a
+ different size
+
+Variable-length arrays and the types derived from
+ them (pointers to them, etc) are commonly known as
+ "variably-modified types" (VM). Objects of any
+ variably-modified type may only be declared
+ at block scope or function prototype scope.
+
+
+- VLA는 static이 될 수 없음.
+
+__STDC_NO_VLA__ == 1?
+
+C99에서 지원, C11에선 선택지원, C23에선 automatic storage
+duration이 선택.
+
+
+VLA는 automatic / allocated storage duration을 
+지원해야 함.
+
+C23의 경우 automatic이 지원되지 않을 수 있음.
+auto 변수.
+
+automatic storage duration. The storage is 
+allocated when the block in which the object
+was declared is entered and deallocated when it
+is exited by any means (goto, return, reaching the end).
+
+ One exception is the VLAs; their storage is allocated
+ when the declaration is executed, not on block entry,
+  and deallocated when the declaration goes out of
+  scope, not when the block is exited (since C99).
+  
+  If the block is entered recursively, a new
+  allocation is performed for every recursion
+  level. All function parameters and non-static
+  block-scope objects have this storage duration,
+  as well as compound literals used at block scope
+  (until C23)
+
+
+VLA는 다른 변수와 다르게 block entry에서 할당되지 않고, 선언문이 실행되어야 할당됨.
+그리고 선언문의 영역을 나가야 해제되고, 블럭을 나간다고 해제되는 건 아님.
+
+The scope of the variable is the region where it is valid to refer to the variable using its name.
