@@ -22,7 +22,6 @@
 #define KOR 0
 #define MATH 1
 
-void sort(char array[static 5]);
 void sort_by(double array[static 5], char other[static 5]);
 int grade_to_score(char grade);
 char most_frequent(char array[static 5]);
@@ -57,16 +56,6 @@ int main() {
     return 0;
 }
 
-void sort(char array[static 5]) {
-    for (int i = 0, j; i < 4; i++)
-        for (j = i + 1; j < 5; j++)
-            if (array[i] > array[j]) {
-                array[i] = array[i] ^ array[j];
-                array[j] = array[i] ^ array[j];
-                array[i] = array[i] ^ array[j];
-            }
-}
-
 void sort_by(double array[static 5], char other[static 5]) {
     int i, j;
     double temp;
@@ -75,11 +64,11 @@ void sort_by(double array[static 5], char other[static 5]) {
             if (array[i] < array[j]) {
                 temp = array[i];
                 array[i] = array[j];
-                array[j] = temp;
+                array[j] = temp; // double does not support ^ op
 
-                other[i] = other[i] ^ other[j];
-                other[j] = other[i] ^ other[j];
-                other[i] = other[i] ^ other[j];
+                other[i] ^= other[j];
+                other[j] ^= other[i];
+                other[i] ^= other[j];
             }
 }
 

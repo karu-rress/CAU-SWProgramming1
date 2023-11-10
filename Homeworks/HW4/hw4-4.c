@@ -27,7 +27,7 @@
 void selection_sort(int array[static const ARRAY_SIZE]);
 void merge_array(int a[static const ARRAY_SIZE], int b[static const ARRAY_SIZE], int merged[static ARRAY_SIZE]);
 
-int main() {
+int main(void) {
     int rnd, i;
     int a[ARRAY_SIZE] = {0}, b[ARRAY_SIZE] = {0}, c[ARRAY_SIZE] = {0}, d[ARRAY_SIZE] = {0};
     int odd[ARRAY_SIZE] = {0}, even[ARRAY_SIZE] = {0}, all[ARRAY_SIZE] = {0};
