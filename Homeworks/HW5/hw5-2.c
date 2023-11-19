@@ -27,8 +27,8 @@ int sum_word(int word_counts[static 5]);
 double total_avg_len(int word_counts[static restrict 5], double average_length[static restrict 5]);
 
 int main(void) {
-    int word_counts[5], line_number[5];
-    double average_length[5];
+    int word_counts[5] = {0,}, line_number[5] = {0,};
+    double average_length[5] = {0.,};
 
     for (int i = 0; i < 5; i++) {
         line_scan(&word_counts[i], &average_length[i]);
@@ -46,36 +46,29 @@ int main(void) {
 }
 
 void line_scan(int *restrict word_cnt, double *restrict avg_len) {
-    char buffer[BUFF_SIZE];
-    int ch;
-    int word_len = 0, total_len = 0, i = 0;
+    char buffer[BUFF_SIZE] = "";
+    int word_len = 0, total_len = 0;
     _Bool state;
     const _Bool WORD = 0, WHITESPACE = 1;
     
     fgets(buffer, BUFF_SIZE, stdin);
-    for (const char *p = buffer; p != '\0'; p++) {
-
-    }
-
-
-    do {
-        ch = getchar();
-        if (i++ == 0)
-            state = (ch == ' ' || ch == '\t'); // isspace(buf[i])
+    for (const char *p = buffer; *p != '\0'; p++) {
+        if (p == buffer) {
+            state = (*p == ' ' || *p == '\t'); // isspace(buf[i])
+        }
 
         // state가 달라졌다면
-        if (state != (ch == ' ' || ch == '\t' || ch == '\n')) {
+        if (state != (*p == ' ' || *p == '\t' || *p == '\n')) {
             state = !state;
             if (state == WHITESPACE) {            // word -> white
-                word_cnt++;
+                (*word_cnt)++;
                 total_len += word_len;
                 word_len = 0;
             }
         }
         if (state == WORD)
             word_len++;
-    } while (ch != '\n');
-
+    }
 
     *avg_len = (double)total_len / *word_cnt;
 
@@ -84,28 +77,24 @@ void line_scan(int *restrict word_cnt, double *restrict avg_len) {
 }
 
 void sorting(int word_counts[static restrict 5], double average_length[static restrict 5], int line_number[static restrict 5]) {
-    int tmp;
-    double tmpf;
-
     for (int i = 0; i < 4; i++)
-        for (int j = i; j < 5; j++) {
-            if (word_counts[j] > word_counts[i]) {
-                swap(&word_counts[i], &word_counts[j], INT);
-                swap(&average_length[i], &average_length[j], DOUBLE);
-                swap(&line_number[i], &line_number[j], INT);
-            }
-            else if (word_counts[i] == word_counts[j] && average_length[j] > average_length[i]) {
-                swap(&word_counts[i], &word_counts[j], INT);
-                swap(&average_length[i], &average_length[j], DOUBLE);
-                swap(&line_number[i], &line_number[j], INT);
-            }
-            else if (average_length[j] == average_length[i] && line_number[j] > line_number[i]) {
-                swap(&word_counts[i], &word_counts[j], INT);
-                swap(&average_length[i], &average_length[j], DOUBLE);
-                swap(&line_number[i], &line_number[j], INT);
-            }
+    for (int j = i; j < 5; j++) {
+        if (word_counts[j] > word_counts[i]) {
+            swap(&word_counts[i], &word_counts[j], INT);
+            swap(&average_length[i], &average_length[j], DOUBLE);
+            swap(&line_number[i], &line_number[j], INT);
         }
-    // 개수, 길이, 번호
+        else if (word_counts[i] == word_counts[j] && average_length[j] > average_length[i]) {
+            swap(&word_counts[i], &word_counts[j], INT);
+            swap(&average_length[i], &average_length[j], DOUBLE);
+            swap(&line_number[i], &line_number[j], INT);
+        }
+        else if (average_length[j] == average_length[i] && line_number[j] > line_number[i]) {
+            swap(&word_counts[i], &word_counts[j], INT);
+            swap(&average_length[i], &average_length[j], DOUBLE);
+            swap(&line_number[i], &line_number[j], INT);
+        }
+    }
 }
 
 void swap(void *restrict v1, void *restrict v2, int TYPE) {
@@ -137,7 +126,7 @@ int sum_word(int word_counts[static 5]) {
 double total_avg_len(int word_counts[static restrict 5], double average_length[static restrict 5]) {
     int total_length = 0;
     for (int i = 0; i < 5; i++) {
-        total_length += word_counts[i] * average_length[i];
+        total_length += (int)(word_counts[i] * average_length[i]);
     }
 
     return (double)total_length / sum_word(word_counts);
