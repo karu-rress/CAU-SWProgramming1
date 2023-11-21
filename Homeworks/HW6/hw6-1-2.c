@@ -14,17 +14,17 @@
 
 #include <stdio.h>
 
-int fact(int n);
+unsigned long long fact(unsigned long long n);
 
 int main(void) {
-    int n, trees;
-    scanf("%d", &n);
+    unsigned long long n, trees;
+    scanf("%llu", &n);
 
     // ₂nCn = 2n! / (2n-n)! n!
     trees = fact(2*n) / fact(2*n - n) * fact(n);
-    printf("trees: %d\n", trees);
+    printf("trees: %llu\n", trees);
 }
 
-int fact(int n) {
+unsigned long long fact(unsigned long long n) {
     return (n <= 1) ? 1 : n * fact(n-1);
 }

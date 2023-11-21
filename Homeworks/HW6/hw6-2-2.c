@@ -18,15 +18,15 @@
 
 #include <stdio.h>
 
-void avg_ascii(const char *restrict str, double *restrict avg, size_t *restrict len);
+void avg_ascii(char *restrict str, double *restrict avg, size_t *restrict len);
 
 int main(void) {
-    char str[21] = "", ch;
+    char str[21] = "";
     size_t idx = 0, len;
     double avg;
 
     do {
-        str[idx] = getchar();
+        str[idx] = (char)getchar();
     } while (str[idx] >= 'A' && str[idx++] <= 'Z'); // while 대문자
 
     avg_ascii(str, &avg, &len);
@@ -39,11 +39,12 @@ int main(void) {
     return 0;
 }
 
-void avg_ascii(const char *restrict str, double *restrict avg, size_t *restrict len) {
+void avg_ascii(char *restrict str, double *restrict avg, size_t *restrict len) {
     static size_t sum = 0, word_len = 0; // 초기화 불필요... (static)
     if (*str < 'A' || *str > 'Z') {
         *avg = sum / word_len;
         *len = word_len;
+        str[*len] = '\0'; // 마지막 문자는 삭제!
         return;
     }
 

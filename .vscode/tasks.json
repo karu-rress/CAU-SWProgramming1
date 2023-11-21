@@ -19,6 +19,7 @@
                 "-Wformat=2",
                 "-Wunreachable-code",
                 "-Wunused-but-set-parameter",
+                "-fstack-protector",
                 "-std=c99",
                 "-g3",
                 "${fileBasename}",

@@ -22,7 +22,7 @@
 #include <time.h>
 
 void selection_sort(int array[static 21]);
-int binary_search(int array[static const restrict 21], int value, int *restrict pos);
+int binary_search(int array[static const restrict 21], const int *low, const int *high, int value, int *restrict pos);
 
 int main(void) {
     int rands[21], tmp, cmp_cnt, value, pos;
@@ -50,7 +50,7 @@ int main(void) {
 
     printf("하나의 자연수 입력 (61 ~ 100) >> ");
     scanf("%d", &value);
-    cmp_cnt = binary_search(rands, value, &pos);
+    cmp_cnt = binary_search(rands, &rands[0], &rands[20], value, &pos);
 
     if (pos == -1) {
         printf("NOT FOUND\n");
@@ -83,31 +83,25 @@ void selection_sort(int array[static 21]) {
  * @brief 이진탐색 함수 (재귀형)
  * 
  * @param array 비교할 배열. 정렬되어 있어야 함.
+ * @param low 배열의 시작 주소
+ * @param high 배열의 끝 주소
  * @param value 찾을 값.
  * @param pos 성공한 경우, value의 인덱스. 실패한 경우 -1
  * @return 총 비교횟수
  */
-int binary_search(int array[static const restrict 21], int value, int *restrict pos) {
-    static const int *low = NULL, *high = NULL, *mid = NULL;
+int binary_search(int array[static const restrict 21], const int *low, const int *high, int value, int *restrict pos) {
+    static const int *mid = NULL;
     static int cnt = 0;
-    if (low == NULL && high == NULL && mid == NULL) {
-        low = array;
-        high = &array[20];
-    }
-    
     if (low <= high) {
         cnt++;
         mid = low + (high - low) / 2;
-
         if (value == *mid) {
             *pos = (int)(mid - array);
             return cnt;
         }
-        else if (value > *mid) 
-            low = mid + 1;
-        else 
-            high = mid - 1;
-        return binary_search(array, value, pos);
+        return (value > *mid)
+            ? binary_search(array, mid + 1, high, value, pos)
+            : binary_search(array, low, mid - 1, value, pos); 
     }
 
     *pos = -1;

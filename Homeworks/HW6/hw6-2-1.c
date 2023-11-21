@@ -18,7 +18,7 @@
 
 #include <stdio.h>
 
-void avg_ascii(const char *restrict str, double *restrict avg, size_t *restrict len);
+void avg_ascii(char *restrict str, double *restrict avg, size_t *restrict len);
 
 int main(void) {
     char str[21] = "", ch;
@@ -30,7 +30,6 @@ int main(void) {
     } while (str[idx] >= 'A' && str[idx++] <= 'Z'); // while 대문자
 
     avg_ascii(str, &avg, &len);
-    str[len] = '\0'; // 마지막 단어는 삭제!
 
     printf("Word: %s\n", str);
     printf("Length: %zu\n", len);
@@ -39,7 +38,7 @@ int main(void) {
     return 0;
 }
 
-void avg_ascii(const char *restrict str, double *restrict avg, size_t *restrict len) {
+void avg_ascii(char *restrict str, double *restrict avg, size_t *restrict len) {
     size_t sum = 0, word_len = 0;
     for (size_t i = 0; str[i] >= 'A' && str[i] <= 'Z'; i++) {
         sum += str[i];
@@ -48,4 +47,5 @@ void avg_ascii(const char *restrict str, double *restrict avg, size_t *restrict 
 
     *avg = sum / word_len;
     *len = word_len;
+    str[*len] = '\0'; // 마지막 문자는 삭제!
 }
