@@ -51,7 +51,7 @@ int main(void) {
     }
     puts("");
     
-    // 학번 생성 및 출력
+    // 학번 생성
     for (int i = 0; i < STU_NO; i++) {
         if (count(names, names[i]) > 1) {
             if (!is_duplicate)
@@ -66,8 +66,21 @@ int main(void) {
             }
             sprintf(id[i], "%02d", idx++);      // itoa()는 비표준 함수
         }
-        printf("[%4s] 이름: %s\t\t학과: %s\n", id[i], names[i], depts[i]);
     }
+
+    // 정렬
+    for (int i = 0; i < STU_NO - 1; i++)
+        for (int j = i + 1; j < STU_NO; j++) {
+            if (strcmp(id[i], id[j]) > 0) {
+                swap(id[i], id[j]);
+                swap(names[i], names[j]);
+                swap(depts[i], depts[j]);
+            }
+        }
+
+    for (int i = 0; i < STU_NO; i++)
+        printf("[%4s] 이름: %s\t\t학과: %s\n", id[i], names[i], depts[i]);
+
     return 0;
 }
 
