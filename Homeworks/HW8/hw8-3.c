@@ -93,7 +93,7 @@ void swap(char str1[static restrict 10], char str2[static restrict 10]) {
 
 int count(char array[static const STU_NO][10], const char *str) {
     int count = 0;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < STU_NO; i++) {
         if (!strcmp(array[i], str))
             count++;
     }
