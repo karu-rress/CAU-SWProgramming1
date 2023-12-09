@@ -73,12 +73,18 @@ int main(void) {
             qualifiers[i].name, qualifiers[i].major, qualifiers[i].score, qualifiers[i].id[0]);
 
     
-    /**
-     * 
- *   ② 각 지원전공별로 2명 이상의 합격자수를 갖는 전공명과 합격자수를 출력하는 프로그램을 작성.
-     * 
-     * 
-    */
+    char *majors[cnt];
+    int tmpi;
+    for (int i = 0; i < cnt; i++) {
+        tmpi = 0;
+        memset(majors, NULL, sizeof majors);
+        for (int j = i + 1; !strcmp(qualifiers[j].major, qualifiers[i].major) && count(majors, cnt, qualifiers[j].major) == 0; j++) {
+            majors[j] = qualifiers[j].major;
+            tmpi++;
+        }
+        if (tmpi >= 2)
+            printf("%s 전공: %d명\n", majors[i], tmpi);
+    }
 
     return 0;
 }
@@ -96,4 +102,13 @@ void assign_id(Qualifer *qualifiers, int cnt) {
     for (int i = 0; i < cnt; i++) {
         sprintf(qualifiers[i].id, "%d%s%c", i + 1, qualifiers[i].major, qualifiers[i].name[0]);
     }
+}
+
+int count(const Qualifer *qualifers, int cnt, const char *str) {
+    int count = 0;
+    for (int i = 0; i < cnt; i++) {
+        if (!strcmp(qualifers[i].major, str))
+            count++;
+    }
+    return count;    
 }
