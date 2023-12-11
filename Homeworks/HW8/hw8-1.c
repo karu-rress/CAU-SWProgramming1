@@ -17,7 +17,7 @@
 #include <string.h>
 
 int main(void) {
-    char str[51], substr[51], *tmp;
+    char str[51] = "", substr[51] = "", *tmp;
     int count = 0, i = 1;
 
     printf("string: ");

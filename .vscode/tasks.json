@@ -20,7 +20,7 @@
                 "-Wunreachable-code",
                 "-Wunused-but-set-parameter",
                 "-fstack-protector",
-                "-std=c99",
+                "-std=c11",
                 "-g3",
                 "${fileBasename}",
                 "-o",

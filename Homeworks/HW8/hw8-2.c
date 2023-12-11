@@ -18,7 +18,7 @@
 void swap(char str1[static restrict 10], char str2[static restrict 10]);
 int count(char array[static const STU_NO][10], const char *str);
 bool contains(char array[static const STU_NO][10], char string[10]);
-inline bool is_empty(char array[static 10]) { return array == NULL || *array == '\0'; }
+static inline bool is_empty(char array[static 10]) { return array == NULL || *array == '\0'; }
 
 int main(void) {
     char depts[STU_NO][10] = {""}, names[STU_NO][10] = {""}, depts_set[STU_NO][10] = {"","","","",""};
