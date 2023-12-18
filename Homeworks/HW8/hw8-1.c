@@ -21,6 +21,8 @@ int main(void) {
     int count = 0, i = 1;
 
     printf("string: ");
+    // fgets(str, sizeof str, stdin);
+    // scanf_s("%[^\n]s", str);
     gets_s(str, sizeof str);
 
     printf("substring: ");
