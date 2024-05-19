@@ -1,10 +1,3 @@
-/**
- * @file pointer-math.c
- * @author Karu
- * @date 2023-12-12
- * 
- */
-
 #include <stdio.h>
 
 int v, source = 100, *p = &source;

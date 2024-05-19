@@ -27,5 +27,15 @@
 int main(void) {
     char names[5], depts[5];
     int id[5], scores[5][3];
+
+    for (int i = 0; i < 5; i++) {
+        scanf("%c %c %d %d %d %d", &names[i], &depts[i], &id[i], &scores[i][0], &scores[i][1], &scores[i][2]);
+    }
+
+    puts("Korean:");
+
+    puts("English:");
+
+    puts("Math:");
     return 0;
 }
